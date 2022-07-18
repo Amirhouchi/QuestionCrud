@@ -2,7 +2,7 @@
 @section("contenu")
 <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h3 class="border-bottom pb-2 mb-4">Liste des Questions</h3>
-
+<h1>{{$chxr}} </h1>
         <div class="mt-4">
         <div class="d-flex justify-content-end mb-4">
         <a href="" class="btn btn-primary">S'inscrire</a>
@@ -12,6 +12,26 @@
                 <p></p>
 
             </div>
+
+
+            <script>
+    var secteur_id = <?php echo json_encode($question->id_secteur); ?>;
+    var question_actuel_id = <?php echo json_encode($question_actuel->id); ?>;
+    var chr = <?php echo json_encode($chxr->id); ?>;
+    </script>
+    <script>
+
+   localStorage.setItem("q0", [JSON.stringify(secteur_id) , JSON.stringify(question_actuel_id), JSON.stringify(chr), 1,1]);
+   console.log(localStorage)
+  console.log(localStorage.getItem("q0").split(","));
+  var q0 = localStorage.getItem("q0").split(",");
+  console.log(q0);
+    </script>
+  
+  {{$demande = "Test"}}
+  {{route ('demande.ajouter',['localStorage'=>$demande])}}
+
+  <h1>{{$demande}}</h1>
             
         <table class="table table-bordred table-hover">
   <thead>
@@ -21,12 +41,13 @@
       <th scope="col">nom_question</th>
       <th scope="col">text_question</th>
       <th scope="col">id_secteur</th>
-      <td>{{$secteur}}</td>
+      <td>{{$question->id_secteur}}</td>
     </tr>
   </thead>
   <tbody>
-    @foreach ($questions as $question)
-    @if ($question->id_secteur == $secteur->id  && $question->numero_question == 0 )
+
+   
+  
     <tr>
       <th scope="row">{{$question->id}}</th>
       <td>{{$question->numero_question}}</td>
@@ -54,17 +75,14 @@
         @foreach ($choixrepenses as $choixrepense)
         @if ($choixrepense->id_question == $question->id )
          <td>{{$choixrepense->id}} </td>
-        <td><a href="{{route ('suivant.suivant',['secteur','question'=>$questions[$choixrepense->id_question_suivant]])}}" class="btn btn-info">{{$choixrepense->text_choix_repense}}</a></td>
+        <td><a href="{{route ('suivant.suivant',['secteur'=>$secteur,'question'=>$questions[$choixrepense->id_question_suivant], 'chxr'=>$choixrepense ,'question_actuel'=>$question] )}}" class="btn btn-info">{{$choixrepense->text_choix_repense}}</a></td>
         @endif
         @endforeach
         </tr>
  </table>
-
-    @endif
-    @endforeach
   </tbody>
- 
 </table>
+
 
 
         </div>

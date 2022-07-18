@@ -1,5 +1,6 @@
 @extends("layouts.master")
 @section("contenu")
+
 <div class="my-3 p-3 bg-body rounded shadow-sm">
         <h3 class="border-bottom pb-2 mb-4">Liste des Questions</h3>
 
@@ -12,7 +13,7 @@
                 <p></p>
 
             </div>
-            
+    
         <table class="table table-bordred table-hover">
   <thead>
     <tr>
@@ -54,7 +55,7 @@
         @foreach ($choixrepenses as $choixrepense)
         @if ($choixrepense->id_question == $question->id )
          <td>{{$choixrepense->id}} </td>
-        <td><a href="{{route ('suivant.suivant',['question'=>$questions[$choixrepense->id_question_suivant]])}}" class="btn btn-info">{{$choixrepense->text_choix_repense}}</a></td>
+        <td><a href="{{route ('suivant.suivant',['secteur'=>$secteur, 'question'=>$questions[$choixrepense->id_question_suivant], 'chxr'=>$choixrepense,'question_actuel'=>$question])}}" class="btn btn-info">{{$choixrepense->text_choix_repense}}</a></td>
         @endif
         @endforeach
         </tr>

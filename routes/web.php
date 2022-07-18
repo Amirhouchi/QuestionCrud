@@ -26,7 +26,10 @@ Route::get("/demandes", [DemandeController::class,"index"])->name("demandes");
 
 
 Route::get("/demande/{secteur}", [DemandeController::class,"demande"])->name("demande.demande");
-Route::get("/question/{question}", [DemandeController::class,"suivant"])->name("suivant.suivant");
+Route::get("/question/{question}/{secteur}/{chxr}/{question_actuel}", [DemandeController::class,"suivant"])->name("suivant.suivant");
+
+Route::post("/demande/ajouter/{localStorage}", [DemandeContoller::class,'store'])->name("demande.ajouter");
+
 //Route::get("/etudiant/{etudiant}", [EtudiantContoller::class,"edit"])->name("etudiant.edit");
 
 
